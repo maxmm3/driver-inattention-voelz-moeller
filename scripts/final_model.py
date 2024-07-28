@@ -86,16 +86,6 @@ class model_init:
 
         x = self.conv_block(input, self.filters, self.kernel_size, self.pool_size)
         for i in range(self.num_conv_blocks - 1):
-            if x.shape[1] < 10 or x.shape[2] < 10:
-                break
-            x = self.conv_block(x, self.filters, self.kernel_size, self.pool_size)
-        
-        x = tf.keras.layers.BatchNormalization()(x)
-        x = tf.keras.layers.Activation("elu")(x)
-        x = tf.keras.layers.Dropout(self.dropout_rate)(x)
-
-        x = self.conv_block(input, self.filters, self.kernel_size, self.pool_size)
-        for i in range(self.num_conv_blocks - 1):
             x = self.conv_block(x, self.filters, self.kernel_size, self.pool_size)
 
         x = tf.keras.layers.Flatten()(x)
